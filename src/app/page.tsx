@@ -12,27 +12,29 @@ import { api } from "../../convex/_generated/api";
 import { SignOut } from "./(auth)/SignOut";
 import { SignInFormPassword } from "./(auth)/SignInForm";
 import { Button } from "@/components/ui/button";
+import DocumentCard from "./documentCard";
+import CreateDocumentButton from "./createDocumentButton";
 
 export default function Home() {
   const documents = useQuery(api.documents.getDocuments);
   const createDocument = useMutation(api.documents.createDocument);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="p-24 space-y-8">
       <AuthLoading>Carregando...</AuthLoading>
-      <Unauthenticated>
-        <SignInFormPassword />
-      </Unauthenticated>
+      <Unauthenticated>Oi</Unauthenticated>
       <Authenticated>
-        <SignOut />
-        <Button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => createDocument({ title: "hello world" })}
-        >
-          Click me
-        </Button>
+        <div className="flex justify-between items-center">
+          <h1 className="text-4xl font-bold">My Documents</h1>
 
-        {documents?.map((doc) => <div key={doc._id}>{doc.title}</div>)}
+          <CreateDocumentButton />
+        </div>
+
+        <div className="grid grid-cols-4 gap-8">
+          {documents?.map((doc) => (
+            <DocumentCard document={doc} key={doc._id} />
+          ))}
+        </div>
       </Authenticated>
     </main>
   );

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
+import { Label } from "@/components/ui/label";
 
 export function SignInWithPassword({
   provider,
@@ -37,7 +38,7 @@ export function SignInWithPassword({
           });
       }}
     >
-      <label htmlFor="email">Email</label>
+      <Label htmlFor="email">Email</Label>
       <Input name="email" id="email" className="mb-4" autoComplete="email" />
       <div className="flex items-center justify-between">
         <label htmlFor="password">Password</label>
