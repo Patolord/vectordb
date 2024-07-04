@@ -4,10 +4,12 @@ import { mutation, query } from "./_generated/server";
 export const createDocument = mutation({
   args: {
     title: v.string(),
+
   },
   async handler(ctx, args) {
     await ctx.db.insert("documents", {
       title: args.title,
+
     });
   },
 });
