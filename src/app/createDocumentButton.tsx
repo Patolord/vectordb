@@ -2,9 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 
-import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
-
 import {
   Dialog,
   DialogContent,
@@ -13,17 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import UploadDocumentForm from "./uploadDocumentForm";
+import { UploadDocumentForm } from "./uploadDocumentForm";
+import { useState } from "react";
 
 export default function CreateDocumentButton() {
-  const createDocument = useMutation(api.documents.createDocument);
+  //open close state
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => createDocument({ title: "hello world" })}>
-          Upload Document
-        </Button>
+        <Button>Upload Document</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -32,7 +29,7 @@ export default function CreateDocumentButton() {
             Upload a team document for you to search over in the future.
           </DialogDescription>
         </DialogHeader>
-        <UploadDocumentForm />
+        <UploadDocumentForm onUpload={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>
   );

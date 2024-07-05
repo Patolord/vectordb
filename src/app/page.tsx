@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main className="p-24 space-y-8">
       <AuthLoading>Carregando...</AuthLoading>
-      <Unauthenticated>Oi</Unauthenticated>
+      <Unauthenticated>{""}</Unauthenticated>
       <Authenticated>
         <div className="flex justify-between items-center">
           <h1 className="text-4xl font-bold">My Documents</h1>
