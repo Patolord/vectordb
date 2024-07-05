@@ -13,7 +13,8 @@ import { SignOut } from "./(auth)/SignOut";
 import { SignInFormPassword } from "./(auth)/SignInForm";
 import { Button } from "@/components/ui/button";
 import DocumentCard from "./documentCard";
-import CreateDocumentButton from "./createDocumentButton";
+
+import UploadDocumentButton from "./uploadDocumentButton";
 
 export default function Home() {
   const documents = useQuery(api.documents.getDocuments);
@@ -27,7 +28,7 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <h1 className="text-4xl font-bold">My Documents</h1>
 
-          <CreateDocumentButton />
+          <UploadDocumentButton />
         </div>
 
         <div className="grid grid-cols-4 gap-8">

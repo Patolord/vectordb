@@ -2,13 +2,17 @@ import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { auth } from "./auth";
 
+export const generateUploadUrl = mutation(async (ctx) => {
+  return await ctx.storage.generateUploadUrl();
+});
+
 export const createDocument = mutation({
   args: {
     title: v.string(),
+    fileId: v.string(),
   },
   async handler(ctx, args) {
     const userId = await auth.getUserId(ctx);
-    console.log("userId", userId);
 
     if (!userId) {
       throw new ConvexError("Not authenticated");
@@ -17,6 +21,7 @@ export const createDocument = mutation({
     await ctx.db.insert("documents", {
       title: args.title,
       userId: userId,
+      fileId: args.fileId,
     });
   },
 });

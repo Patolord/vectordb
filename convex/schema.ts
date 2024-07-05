@@ -4,8 +4,9 @@ import { v } from "convex/values";
 
 export default defineSchema({
   ...authTables,
-  documents: defineTable({ title: v.string(), userId: v.id("users") }).index(
-    "by_userId",
-    ["userId"]
-  ),
+  documents: defineTable({
+    title: v.string(),
+    userId: v.id("users"),
+    fileId: v.string(),
+  }).index("by_userId", ["userId"]),
 });
