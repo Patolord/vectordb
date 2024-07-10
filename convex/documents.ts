@@ -9,7 +9,7 @@ export const generateUploadUrl = mutation(async (ctx) => {
 export const createDocument = mutation({
   args: {
     title: v.string(),
-    fileId: v.string(),
+    fileId: v.id("_storage"),
   },
   async handler(ctx, args) {
     const userId = await auth.getUserId(ctx);
@@ -36,5 +36,27 @@ export const getDocuments = query({
       .query("documents")
       .withIndex("by_userId", (q) => q.eq("userId", userId))
       .collect();
+  },
+});
+
+export const getDocument = query({
+  args: {
+    documentId: v.id("documents"),
+  },
+  async handler(ctx, args) {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) {
+      return null;
+    }
+
+    const doc = await ctx.db.get(args.documentId);
+    if (!doc || doc.userId !== userId) {
+      return null;
+    }
+
+    return {
+      ...doc,
+      documentUrl: await ctx.storage.getUrl(doc.fileId),
+    };
   },
 });

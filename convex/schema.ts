@@ -7,6 +7,6 @@ export default defineSchema({
   documents: defineTable({
     title: v.string(),
     userId: v.id("users"),
-    fileId: v.string(),
+    fileId: v.id("_storage"),
   }).index("by_userId", ["userId"]),
 });
