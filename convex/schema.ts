@@ -1,6 +1,7 @@
 import { defineSchema, defineTable } from "convex/server";
 import { authTables } from "@convex-dev/auth/server";
 import { v } from "convex/values";
+import { text } from "stream/consumers";
 
 export default defineSchema({
   ...authTables,
@@ -9,4 +10,9 @@ export default defineSchema({
     userId: v.id("users"),
     fileId: v.id("_storage"),
   }).index("by_userId", ["userId"]),
+  chats: defineTable({
+    documentId: v.id("documents"),
+    userId: v.id("users"),
+    text: v.string(),
+  }).index("by_documentId_userId", ["userId", "documentId"]),
 });
