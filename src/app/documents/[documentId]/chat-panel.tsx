@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { api } from "../../../../convex/_generated/api";
-import { useAction } from "convex/react";
+import { useAction, useQuery } from "convex/react";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,7 @@ export default function ChatPanel({
 }: {
   documentId: Id<"documents">;
 }) {
+  const chats = useQuery(api.chats.getChatsForDocument, { documentId });
   const askQuestion = useAction(api.documents.askQuestion);
 
   return (
@@ -20,11 +21,17 @@ export default function ChatPanel({
         <div className="dark:bg-slate-950 rounded p-2 ">
           AI: Ask any question using AI about this document below
         </div>
-        <div
-          className={cn({ "bg-slate-800": true }, " rounded p-2 text-right")}
-        >
-          YOU: Ask any question using AI about this document below
-        </div>
+        {chats?.map((chat) => (
+          <div
+            key={chat._id}
+            className={cn(
+              { "bg-slate-800": chat.isHuman, "text-right": chat.isHuman },
+              " rounded p-2"
+            )}
+          >
+            {chat.isHuman ? "You" : "AI"}: {chat.text}
+          </div>
+        ))}
       </div>
       <div className="flex gap-1">
         <form

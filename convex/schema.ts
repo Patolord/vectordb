@@ -14,5 +14,6 @@ export default defineSchema({
     documentId: v.id("documents"),
     userId: v.id("users"),
     text: v.string(),
-  }).index("by_documentId_userId", ["userId", "documentId"]),
+    isHuman: v.boolean(),
+  }).index("by_documentId_userId", ["documentId", "userId"]),
 });

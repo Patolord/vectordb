@@ -32,13 +32,7 @@ export default function DocumentPage({
             <div className="bg-gray-600 p-4 rounded-xl flex-1 h-[500px]">
               {document.documentUrl && (
                 <iframe
-                  style={{
-                    border: "2px solid blue",
-                    opacity: 0.8,
-                    transform:
-                      "rotate(10deg) translate(10px, 35px) skewX(10deg) ",
-                    perspective: "200px",
-                  }}
+                  style={{}}
                   className="w-full h-full"
                   src={document.documentUrl}
                 />
@@ -46,7 +40,7 @@ export default function DocumentPage({
             </div>
           </TabsContent>
           <TabsContent value="chat">
-            <ChatPanel documentId={params.documentId} />
+            <ChatPanel documentId={document._id} />
           </TabsContent>
         </Tabs>
       </div>
