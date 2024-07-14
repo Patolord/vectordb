@@ -7,6 +7,7 @@ export default defineSchema({
   ...authTables,
   documents: defineTable({
     title: v.string(),
+    description: v.optional(v.string()),
     userId: v.id("users"),
     fileId: v.id("_storage"),
   }).index("by_userId", ["userId"]),
