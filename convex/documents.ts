@@ -10,7 +10,7 @@ import {
   QueryCtx,
 } from "./_generated/server";
 import { auth } from "./auth";
-import { api, internal } from "./_generated/api";
+import { internal } from "./_generated/api";
 import OpenAI from "openai";
 import { Id } from "./_generated/dataModel";
 
@@ -223,5 +223,21 @@ export const askQuestion = action({
     });
 
     return response;
+  },
+});
+
+export const deleteDocument = mutation({
+  args: {
+    documentId: v.id("documents"),
+  },
+  async handler(ctx, args) {
+    const accessObj = await hasAccessToDocument(ctx, args.documentId);
+
+    if (!accessObj) {
+      throw new ConvexError("You do not have access to this document");
+    }
+
+    await ctx.storage.delete(accessObj.document.fileId);
+    await ctx.db.delete(args.documentId);
   },
 });
