@@ -17,4 +17,8 @@ export default defineSchema({
     text: v.string(),
     isHuman: v.boolean(),
   }).index("by_documentId_userId", ["documentId", "userId"]),
+  notes: defineTable({
+    text: v.string(),
+    userId: v.id("users"),
+  }).index("by_userId", ["userId"]),
 });

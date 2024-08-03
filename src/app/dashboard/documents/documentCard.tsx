@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Doc } from "../../convex/_generated/dataModel";
+import { Doc } from "../../../../convex/_generated/dataModel";
 import { Button } from "@/components/ui/button";
 import { Eye, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export default function DocumentCard({
       <CardContent></CardContent>
       <CardFooter>
         <Button asChild className="flex items-center gap-2">
-          <Link href={`/documents/${document._id}`}>
+          <Link href={`/dashboard/documents/${document._id}`}>
             <Eye className="size-4" /> View
           </Link>
         </Button>

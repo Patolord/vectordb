@@ -25,7 +25,7 @@ export default function Header() {
             <div>LOGO</div>
           </Link>
           <nav>
-            <Link href="/" className="hover:text-slate-400">
+            <Link href="/dashboard/documents" className="hover:text-slate-400">
               Documents
             </Link>
           </nav>
