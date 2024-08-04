@@ -18,13 +18,13 @@ export default function SearchPage() {
 
             <SearchForm setResults={setResults} />
 
-            <ul className="space-y-8">
+            <ul className="flex flex-col gap-4">
                 {results?.map((result) => {
                     if (result.type === 'notes') {
 
                         return (
                             <Link href={`/dashboard/notes/${result.record._id}`}><li className="bg-slate-800 rounded p-4 whitespace-pre-line">
-                                type: Note
+                                type: Note {result.score}
                                 {result.record.text.substring(0, 500) + "..."}</li></Link>)
                     }
                     else {

@@ -24,8 +24,8 @@ export const searchAction = action({
     });
 
     const records: (
-      | { type: "notes"; record: Doc<"notes"> }
-      | { type: "documents"; record: Doc<"documents"> }
+      | { type: "notes"; score: number; record: Doc<"notes"> }
+      | { type: "documents"; score: number; record: Doc<"documents"> }
     )[] = [];
 
     await Promise.all(
@@ -35,9 +35,11 @@ export const searchAction = action({
         });
         if (!note) return;
 
-        records.push({ record: note, type: "notes" });
+        records.push({ record: note, score: result._score, type: "notes" });
       })
     );
+
+    records.sort((a, b) => b.score - a.score);
     return records;
   },
 });
