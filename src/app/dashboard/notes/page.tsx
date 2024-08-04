@@ -9,6 +9,6 @@ export default function NotesPage() {
 
     const notes = useQuery(api.notes.getNotes)
     return (
-        <div>PLease select a note</div>
+        <div>Please select a note</div>
     )
 }

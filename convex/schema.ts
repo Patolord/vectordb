@@ -20,5 +20,12 @@ export default defineSchema({
   notes: defineTable({
     text: v.string(),
     userId: v.id("users"),
-  }).index("by_userId", ["userId"]),
+    embedding: v.optional(v.array(v.number())),
+  })
+    .index("by_userId", ["userId"])
+    .vectorIndex("by_embedding", {
+      vectorField: "embedding",
+      dimensions: 1536,
+      filterFields: ["userId"],
+    }),
 });
